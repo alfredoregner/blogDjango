@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todas as Matérias</title>
+    </head>
+    <body>
+        <h1>Matérias</h1>
+        {% for post in posts %}
+            <h2>{{ post.title }}</h2>
+            <img src="{{ post.image.url }}" alt="">
+            <p>{{ post.description }} minutos</p>
+            <p><strong>Data de publicação:</strong> {{ post.publication_date }}</p>
+            <p><strong>Autor:</strong> {{ post.author }}</p>
+            <hr>
+        {% empty %}
+            <p>Nenhuma matéria cadastrada.</p>
+        {% endfor %}
+    </body>
+</html>
