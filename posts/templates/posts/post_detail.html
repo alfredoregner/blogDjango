@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes</title>
+    <title>{{ post.título }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #000000;
+            border-radius: 8px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+            border: 2px solid #000000;
+            border-radius: 6px; 
+        }
+        h1 {
+            color: #000000;
+        }
+        p {
+            line-height: 1.6;
+        }
+        strong {
+            color: rgb(211, 0, 0);
+        }
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: red;
+            text-decoration:
+                none;
+        }
+        .back-link:hover {
+            color: rgb(211, 0, 0);
+            text-decoration: underline;
+        }
+        .publication{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <a href="{% url 'post_list' %}" class="back-link">← Todas as matérias</a>
+        <h1>{{ post.title }}</h1>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Imagem de {{ post.title }}">
+        {% endif %}
+        <p>{{ post.description }}</p>
+        <div class="publication">
+            <p><strong>Data de publicação: </strong>{{ post.publication_date }}</p>
+            <p><strong>Autor: </strong> {{ post.author }}</p>
+        </div>
+        <a href="{% url 'post_list' %}" class="back-link">← Todas as matérias</a>
+    </div>
 </body>
 </html>

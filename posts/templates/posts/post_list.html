@@ -4,18 +4,111 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Todas as Matérias</title>
+        <style>
+            body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            line-height: 1.6;
+            }
+            .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border: 2px, solid #000000;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0,
+            0, 0.06); /* shadow-md */
+            }
+            h1 {    
+            color: #000000;
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 1.5rem;
+            text-align: center;
+            }
+            .post-item {
+            display: flex;
+            align-items: center; /* Alinha verticalmente imagem e texto */
+            gap: 1rem; /* Espaçamento entre imagem e texto */
+            margin-bottom: 1.5rem;
+            }
+            .post-content {
+            flex-grow: 1; /* Permite que o conteúdo da receita ocupe o espaço restante */
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            /* border: 2px dashed #b1b1b1; */
+            border-radius: 0.75rem;
+            padding: 8px;
+            margin-bottom: 10px;
+            }
+            .post-content img {
+            width: 200px; /* w-24 */
+            height: 200px; /* h-24 */
+            align-items: center;
+            object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+            border-radius: 0.5rem; /* rounded-md */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            margin-bottom: 8px;
+            }
+            h2 {
+            color: #1f2937;
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            margin-top: 0; /* Remove margin-top padrão do h2 */
+            margin-bottom: 0.75rem;
+            }
+            h2 a {
+            color: red; /* indigo-600 */
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+            }
+            h2 a:hover {
+            color: rgb(211, 0, 0);
+            text-decoration: underline;
+            }
+            p {
+            margin-bottom: 0.5rem;
+            }
+            strong {
+            font-weight: 600;
+            }
+            hr {
+            border-top: 1px solid #000000; /* border-gray-200 */
+            margin-top: 1.5rem;           
+            margin-bottom: 1.5rem;
+            }
+            .empty-message {
+            text-align: center;
+            font-style: italic;
+            color: #6b7280;
+            padding: 1rem;
+            border: 1px dashed #d1d5db;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            }
+            hr{
+                color: #000000;
+            }
+            </style>
     </head>
     <body>
-        <h1>Matérias</h1>
-        {% for post in posts %}
-            <h2>{{ post.title }}</h2>
-            <img src="{{ post.image.url }}" alt="">
-            <p>{{ post.description }} minutos</p>
-            <p><strong>Data de publicação:</strong> {{ post.publication_date }}</p>
-            <p><strong>Autor:</strong> {{ post.author }}</p>
-            <hr>
-        {% empty %}
-            <p>Nenhuma matéria cadastrada.</p>
-        {% endfor %}
+        <div class="container">
+            <h1>Todas as Matérias</h1>
+            {% for post in posts %}
+                <hr>
+                <div class="post-content">
+                    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+                    {% if post.image %}
+                    <a href="{% url 'post_detail' post.pk %}"><img src="{{ post.image.url }}" alt=""></a>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>Nenhuma matéria cadastrada.</p>
+            {% endfor %}
+            </div>
+            
+        </div>
     </body>
 </html>
